@@ -27,12 +27,20 @@ metadata:
   labels:
     app: python-app
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - name: python-app
     port: 5000
   selector:
    app: python-app
+---
+# ingress-nginx IngressClass
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: internal-nginx
+spec:
+  controller: k8s.io/internal-ingress-nginx
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -57,7 +65,7 @@ spec:
             name: python-app-service
             port: 
               number: 5000
-  ingressClassName: nginx
+  ingressClassName: internal-nginx
 
 # ----------
 # solo se puede usar puesto 30000 - 32767
