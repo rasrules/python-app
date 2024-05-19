@@ -56,7 +56,8 @@ spec:
         backend:
           service:
             name: python-app-service
-            port: 5000
+            port: 
+              number: 5000
 
 # ----------
 # solo se puede usar puesto 30000 - 32767
